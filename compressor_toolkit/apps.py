@@ -27,7 +27,7 @@ class CompressorToolkitConfig(AppConfig):
     POSTCSS_BIN = getattr(
         settings,
         'COMPRESS_POSTCSS_BIN',
-        'node_modules/.bin/postcss' if LOCAL_NPM_INSTALL else 'postcss'
+        'node_modules/.bin/node-sass' if LOCAL_NPM_INSTALL else 'postcss'
     )
 
     # Browser versions config for Autoprefixer
@@ -51,5 +51,5 @@ class CompressorToolkitConfig(AppConfig):
     ES6_COMPILER_CMD = getattr(settings, 'COMPRESS_ES6_COMPILER_CMD', (
         'export NODE_PATH="{paths}" && '
         '{browserify_bin} "{infile}" -o "{outfile}" '
-        '-t [ "{node_modules}/babelify" --presets="{node_modules}/babel-preset-es2015" ]'
+        '-t [ "{node_modules}/babelify" --presets [ "{node_modules}/@babel/preset-env" ] ]'
     ))
